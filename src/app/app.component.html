@@ -1,0 +1,29 @@
+<div class="container">
+  <h1>Bus Seat Booking System</h1>
+
+  <!-- Seat layout display -->
+  <div *ngFor="let row of seats; let rowIndex = index" class="row">
+    <div *ngFor="let seat of row; let seatIndex = index" 
+         class="seat" 
+         [ngClass]="{ 'booked': seat.booked }">
+      {{ rowIndex * seatsPerRow + seatIndex + 1 }}
+    </div>
+  </div>
+
+  <!-- Seat booking form -->
+  <div class="form">
+    <label for="numSeats">Enter number of seats to book:</label>
+    <input type="number" id="numSeats" [(ngModel)]="numSeats" />
+    <button (click)="bookSeats(numSeats)">Book Seats</button>
+  </div>
+
+  <!-- Booking result -->
+  <div *ngIf="bookingResult.length > 0">
+    <h3>Booked Seats:</h3>
+    <ul>
+      <li *ngFor="let seat of bookingResult">
+        Seat {{ (seat.row - 1) * seatsPerRow + seat.seat }}
+      </li>
+    </ul>
+  </div>
+</div>
